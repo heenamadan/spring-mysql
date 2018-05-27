@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <title></title>
+      <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+<h3><a href="/app/secure/article-details">Add new</a></h3>
+<center>
+   <h3>User Articles Details</h3>
+   
+   <div>
+   <div align="left">
+	    Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
+	 </div>
+	 <div align="right">
+	    <form th:action="@{/app-logout}" method="POST">
+	         <input type="submit" value="Logout"/>
+	    </form>
+	 </div>
+	 
+	 <table>
+		<tr>
+		   <th>Article id</th>
+		   <th>Quantity</th>
+		   <th>Item</th>
+		   
+		 </tr>
+	      <tr th:each="article : ${list}">
+	      <tr th:id="${article.articleId}">
+	      
+		   
+		   <td><input type="text" name="articleId" th:value="${article.articleId}" disabled="disabled"/></td>
+		 <td><input type="text" name="quantity" th:value="${article.quantity}" disabled="disabled"/></td>
+		 <td><input type="text" name="category" th:value="${article.category}" disabled="disabled"/></td>
+			
+	      </tr>
+	      </tr>
+	</table>
+	
+</div> <br/>
+<button onclick="goBack()">Go Back</button>	
+
+
+</center>
+ 
+     <!-- <table>
+	      <tr th:each="article : ${userArticles}">
+		    <td th:text="${article.articleId}">Id</td>
+			<td th:text="${article.title}">Title</td>
+			<td th:text="${article.category}">Category</td>
+	      </tr>
+	      <input type="submit" value="Logout"/>
+	</table>
+	 -->
+<script>
+function goBack() {
+    window.history.back();
+}
+function makeEditable(val) {
+	document.getElementById(val+"id").contentEditable = "true";
+	document.getElementById(val+"q").contentEditable = "true";
+	document.getElementById(val+"it").contentEditable = "true";
+}
+</script>
+</body>
+</html>   

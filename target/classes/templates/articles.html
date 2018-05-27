@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <title></title>
+      <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+   <h3>Add Articles Details</h3>
+   <h3><a href="/article/viewAllArticles">View All Added Articles</a></h3>
+   <div align="right">
+	    <form th:action="@{/app-logout}" method="POST">
+	         <input type="submit" value="Logout"/>
+	    </form>
+	 </div>
+   <center>
+   <div class="container" style="width: 50%">
+	    Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b><br/><br/>
+	    Department : <b th:inline="text"  class="user">Management</b><br/><br/>
+	    <div align="center">
+	    <form th:action="@{/article/addarticle}" method="POST" modelAttribute="article">
+	    <div class="row">
+	    <div class="col-25">
+	    <label for="quantity"><b>Quantity</b></label>
+	    </div>
+	     <div class="col-75">
+		<input type="text" name="quantity" placeholder="Enter Quantity" /><br/><br/>
+		</div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-25">
+	    <label for="category"><b>Category</b></label>
+	    </div>
+	    <div class="col-75">
+	<select name="category">
+		<option th:each="dropDownItem : ${itemsList}" 
+			  th:category="${dropDownItem.value}" 
+			  th:text="${dropDownItem.key}" />
+	</select>
+	</div>
+    </div>
+    
+    
+    <div class="row">
+	    <div class="col-25">
+	    <label for="category"><b>Send Email for Approval</b></label>
+	    </div>
+	    <div class="col-75, double">
+	<input type="checkbox" th:id="myCheck" onclick="sendEmail()"/>
+	</div>
+    </div>
+    
+    
+    <div class="container signin">
+	<input type="submit" value="save"/>
+		</div>
+		
+		</form>
+		</div>
+</div>
+</center>
+ <br/>	
+ 
+   <script>
+function sendEmail() {
+	window.location.href = "http://localhost:8080/article/sendEmail";    
+}
+
+
+</script>
+
+</body>
+</html>   
